@@ -2,7 +2,9 @@
 #include "SceneRunner.h"
 #include <fstream>
 
-SceneRunner::SceneRunner(const std::string& windowTitle, int width, int height , int samples) : debug_m(true)
+std::unique_ptr<Scene> SceneRunner::scene_m = nullptr;
+
+SceneRunner::SceneRunner(const std::string& windowTitle, int width, int height, int samples, bool fullScreen) : debug_m(true), fullScreen_m(fullScreen)
 {
 	// Initialize GLFW
 	if (!glfwInit()) exit(EXIT_FAILURE);
@@ -20,14 +22,28 @@ SceneRunner::SceneRunner(const std::string& windowTitle, int width, int height ,
 		glfwWindowHint(GLFW_SAMPLES, samples);
 	}
 
-	// Open the window
-	window_m = glfwCreateWindow(width, height, windowTitle.c_str(), NULL, NULL);
+	if (fullScreen_m)
+	{
+		GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+		const GLFWvidmode* vmode = glfwGetVideoMode(monitor);
+		if (vmode)
+		{
+			window_m = glfwCreateWindow(vmode->width, vmode->height, windowTitle.c_str(), monitor, 0);
+		}
+	}
+	else
+	{
+		window_m = glfwCreateWindow(width, height, windowTitle.c_str(), NULL, NULL);
+	}
 	if (!window_m) {
 		std::cerr << "Unable to create OpenGL context." << std::endl;
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
 	glfwMakeContextCurrent(window_m);
+
+	glfwSetCursorPosCallback(window_m, SceneRunner::onMouseDrag);
+	glfwSetMouseButtonCallback(window_m, SceneRunner::onMouseClick);
 
 	// Get framebuffer size
 	glfwGetFramebufferSize(window_m, &fbw, &fbh);
@@ -49,19 +65,22 @@ SceneRunner::SceneRunner(const std::string& windowTitle, int width, int height ,
 
 }
 
-int SceneRunner::run(std::unique_ptr<Scene> scene)
+int SceneRunner::run()
 {
+	if (scene_m == nullptr)
+	{
+		std::cerr << "Run Scene Error: no scene is set!";
+		return EXIT_FAILURE;
+	}
 	// Enter the main loop
-	mainLoop(window_m, std::move(scene));
+	mainLoop(window_m);
 
 	if (debug_m)
 		glDebugMessageInsert(GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_TYPE_MARKER, 1,
 			GL_DEBUG_SEVERITY_NOTIFICATION, -1, "End debug");
 
-	// Close window and terminate GLFW
 	glfwTerminate();
 
-	// Exit program
 	return EXIT_SUCCESS;
 }
 
@@ -83,6 +102,11 @@ std::string SceneRunner::parseCLArgs(int argc, char** argv, std::map<std::string
 	return recipeName;
 }
 
+void SceneRunner::setScene(std::unique_ptr<Scene> scene)
+{
+	SceneRunner::scene_m = std::move(scene);
+}
+
 
 void SceneRunner::printHelpInfo(const char* exeFile, std::map<std::string, std::string>& sceneData)
 {
@@ -93,23 +117,63 @@ void SceneRunner::printHelpInfo(const char* exeFile, std::map<std::string, std::
 	}
 }
 
-void SceneRunner::mainLoop(GLFWwindow* window, std::unique_ptr<Scene> scene)
+void SceneRunner::mainLoop(GLFWwindow* window)
 {
 
-	scene->setDimensions(fbw, fbh);
-	scene->initScene();
-	scene->resize(fbw, fbh);
+	SceneRunner::scene_m->setDimensions(fbw, fbh);
+	SceneRunner::scene_m->initScene();
+	SceneRunner::scene_m->resize(fbw, fbh);
 
 	while (!glfwWindowShouldClose(window) && !glfwGetKey(window, GLFW_KEY_ESCAPE)) {
 		GLUtils::checkForOpenGLError(__FILE__, __LINE__);
 
-		scene->update(float(glfwGetTime()));
-		scene->render();
+		SceneRunner::scene_m->update(float(glfwGetTime()));
+		SceneRunner::scene_m->render();
 		glfwSwapBuffers(window);
 
 		glfwPollEvents();
 		int state = glfwGetKey(window, GLFW_KEY_SPACE);
 		if (state == GLFW_PRESS)
-			scene->animate(!scene->animating());
+			SceneRunner::scene_m->animate(!scene_m->animating());
+	}
+}
+
+void SceneRunner::onMouseDrag(GLFWwindow* window, double posX, double posY)
+{
+	if (SceneRunner::scene_m == nullptr)
+		return;
+
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == 1)
+	{
+		double x, y;
+		glfwGetCursorPos(window, &x, &y);
+		SceneRunner::scene_m->mouseDrag(MouseEvent(x, y, false, true));
+	}
+
+	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == 1)
+	{
+		double x, y;
+		glfwGetCursorPos(window, &x, &y);
+		SceneRunner::scene_m->mouseDrag(MouseEvent(x, y, true, false));
+	}
+}
+
+void SceneRunner::onMouseClick(GLFWwindow* window, int mouseButtn, int action, int mods)
+{
+	if (SceneRunner::scene_m == nullptr)
+		return;
+
+	if (mouseButtn == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
+	{
+		double x, y;
+		glfwGetCursorPos(window, &x, &y);
+		SceneRunner::scene_m->mouseDown(MouseEvent(static_cast<float>(x), static_cast<float>(y), true, false));
+	}
+	else if (mouseButtn == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+	{
+		double x, y;
+		glfwGetCursorPos(window, &x, &y);
+		SceneRunner::scene_m->mouseDown(MouseEvent(static_cast<float>(x), static_cast<float>(y), false, true));
+
 	}
 }

@@ -1,26 +1,25 @@
 #pragma once
-#include "scene.h"
 
+// Copyright(c) 2017 Packt
+// MIT License (Check Licenses/Licenses.mit for full text)
+
+#include "scene.h"
+#include "GLSLProgram.h"
 #include <GLAD/glad.h>
 #include <string>
 
-class SceneBasic : public Scene
+using namespace std;
+
+class BasicScene : public Scene
 {
 private:
-    GLuint vaoHandle;
-    GLuint programHandle;
+    GLuint vaoHandle_m;
+    GLSLProgram program_m;
 
-    void linkMe(GLint vertShader, GLint fragShader);
     void compileShaderProgram();
-    void writeShaderBinary();
-    void loadShaderBinary(GLint);
-    void loadSpirvShader();
-
-    std::string getShaderInfoLog(GLuint shader);
-    std::string getProgramInfoLog(GLuint program);
 
 public:
-    SceneBasic();
+    BasicScene();
 
     void initScene();
     void update(float t);

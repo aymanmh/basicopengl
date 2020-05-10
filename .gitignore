@@ -94,3 +94,4 @@ ipch/
 *.[Cc]ache
 # but keep track of directories ending in .cache
 !?*.[Cc]ache/
+/basicopengl/Assets/Images/space.png
