@@ -46,7 +46,7 @@ public:
 
 	virtual void mouseDown(MouseEvent event) {};
 
-	virtual void mouseDrag(MouseEvent event) {};
+	virtual void mouseMove(MouseEvent event) {};
 
 	void animate(bool value) { animate_m = value; }
 	bool animating() { return animate_m; }
