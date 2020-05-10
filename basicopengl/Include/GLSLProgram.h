@@ -1,5 +1,8 @@
 #pragma once
 
+// Copyright(c) 2017 Packt
+// MIT License (Check Licenses/Licenses.mit for full text)
+
 #ifdef WIN32
 #pragma warning( disable : 4290 )
 #endif

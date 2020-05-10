@@ -1,11 +1,15 @@
 #pragma once
+
+// Copyright(c) 2017 Packt
+// MIT License (Check Licenses/Licenses.mit for full text)
+
 #include <glad/glad.h>
 #include "Scene.h"
 #include <GLFW/glfw3.h>
 #include "glutils.h"
 
-#define WIN_WIDTH 800
-#define WIN_HEIGHT 600
+const int WIN_DEFAULT_WIDTH = 800;
+const int WIN_DEFAULT_HEIGHT = 600;
 
 #include <map>
 #include <string>
@@ -21,7 +25,7 @@ private:
 	static std::unique_ptr<Scene> scene_m; // ugly but works
 
 public:
-	SceneRunner(const std::string& windowTitle, int width = WIN_WIDTH, int height = WIN_HEIGHT, int samples = 0, bool fullScreen = false);
+	SceneRunner(const std::string& windowTitle, int width = WIN_DEFAULT_WIDTH, int height = WIN_DEFAULT_HEIGHT, int samples = 0, bool fullScreen = false);
 
 	int run();
 

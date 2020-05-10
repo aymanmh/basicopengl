@@ -1,5 +1,8 @@
 #version 410
 
+// Copyright(c) 2017 Packt
+// MIT License (Check Licenses/Licenses.mit for full text)
+
 layout (location = 0) in vec3 VertexPosition;
 layout (location = 1) in vec3 VertexNormal;
 
