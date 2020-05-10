@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\BasicScene.h" />
+    <ClInclude Include="Include\Camera.h" />
     <ClInclude Include="Include\Drawable.h" />
     <ClInclude Include="Include\GLSLProgram.h" />
     <ClInclude Include="Include\glutils.h" />
@@ -27,6 +28,7 @@
   <ItemGroup>
     <ClCompile Include="..\thirdparty\glad\src\glad.c" />
     <ClCompile Include="Src\BasicScene.cpp" />
+    <ClCompile Include="Src\Camera.cpp" />
     <ClCompile Include="Src\GLSLProgram.cpp" />
     <ClCompile Include="Src\glutils.cpp" />
     <ClCompile Include="Src\main.cpp" />
