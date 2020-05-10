@@ -48,6 +48,9 @@ public:
 
 	virtual void mouseMove(MouseEvent event) {};
 
+	virtual void mouseScroll(double deltaX, double deltaY) {};
+
+
 	void animate(bool value) { animate_m = value; }
 	bool animating() { return animate_m; }
 

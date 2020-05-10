@@ -44,6 +44,7 @@ SceneRunner::SceneRunner(const std::string& windowTitle, int width, int height, 
 
 	glfwSetCursorPosCallback(window_m, SceneRunner::onMouseMove);
 	glfwSetMouseButtonCallback(window_m, SceneRunner::onMouseClick);
+	glfwSetScrollCallback(window_m, SceneRunner::onMouseScroll);
 
 	// Get framebuffer size
 	glfwGetFramebufferSize(window_m, &fbw, &fbh);
@@ -177,4 +178,10 @@ void SceneRunner::onMouseClick(GLFWwindow* window, int mouseButtn, int action, i
 		SceneRunner::scene_m->mouseDown(MouseEvent(static_cast<float>(x), static_cast<float>(y), false, true));
 
 	}
+}
+
+void SceneRunner::onMouseScroll(GLFWwindow* window, double deltaX, double deltaY)
+{
+	// for most mouses, deltaY has the value
+	SceneRunner::scene_m->mouseScroll(deltaX, deltaY);
 }
