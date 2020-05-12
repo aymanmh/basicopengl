@@ -38,7 +38,9 @@ private:
 
 	void mainLoop(GLFWwindow* window);
 
-	static void onMouseDrag(GLFWwindow* window, double posX, double posY);
+	static void onMouseMove(GLFWwindow* window, double posX, double posY);
 
 	static void onMouseClick(GLFWwindow* window, int mouseButtn, int action, int mods);
+	
+	static void onMouseScroll(GLFWwindow* window, double deltaX, double deltaY);
 };

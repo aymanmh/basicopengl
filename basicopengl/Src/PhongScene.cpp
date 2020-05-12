@@ -10,8 +10,8 @@ using glm::vec3;
 using glm::mat4;
 
 PhongScene::PhongScene() :
-    angle(0.0f),
-    torus(0.7f, 0.3f, 50, 50)
+    angle_m(0.0f),
+    torus_m(0.7f, 0.3f, 50, 50)
 { }
 
 void PhongScene::initScene()
@@ -20,42 +20,52 @@ void PhongScene::initScene()
 
     glEnable(GL_DEPTH_TEST);
 
-    view = glm::lookAt(vec3(0.0f, 0.0f, 2.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
-    projection = mat4(1.0f);
-    glm::vec4 worldLight = glm::vec4(5.0f, 5.0f, 2.0f, 1.0f);
+    glm::vec3 torusPos = glm::vec3(0.f, 0.f, 0.0f);
+    
+    orbitCamera_m.setLookAt(torusPos);
+    orbitCamera_m.setRadius(radius_m);
+    orbitCamera_m.roate(yaw_m, pitch_m);
+
+    view_m = orbitCamera_m.getViewMatrix();
+    projection_m = mat4(1.0f);
+    worldLight_m = glm::vec4(5.0f, 5.0f, 2.0f, 1.0f);
 
     prog.setUniform("Material.Kd", 0.9f, 0.5f, 0.3f);
     prog.setUniform("Light.Ld", 1.0f, 1.0f, 1.0f);
-    prog.setUniform("Light.Position", view * worldLight);
+    prog.setUniform("Light.Position", view_m * worldLight_m);
     prog.setUniform("Material.Ka", 0.9f, 0.5f, 0.3f);
     prog.setUniform("Light.La", 0.4f, 0.4f, 0.4f);
     prog.setUniform("Material.Ks", 0.8f, 0.8f, 0.8f);
     prog.setUniform("Light.Ls", 1.0f, 1.0f, 1.0f);
     prog.setUniform("Material.Shininess", 100.0f);
+
+    model_m = mat4(1.0f);
+    model_m = glm::rotate(model_m, glm::radians(angle_m), vec3(0.0f, 1.0f, 0.0f));
+    model_m = glm::rotate(model_m, glm::radians(-35.0f), vec3(1.0f, 0.0f, 0.0f));
+    model_m = glm::rotate(model_m, glm::radians(35.0f), vec3(0.0f, 1.0f, 0.0f));
 }
 
-void PhongScene::update(float t) { }
+void PhongScene::update(float t) 
+{
+    prog.setUniform("Light.Position", view_m * worldLight_m); // to keep the light fixed when the camera rotates
+    setMatrices();
+}
 
 void PhongScene::render()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    model = mat4(1.0f);
-    model = glm::rotate(model, glm::radians(angle), vec3(0.0f, 1.0f, 0.0f));
-    model = glm::rotate(model, glm::radians(-35.0f), vec3(1.0f, 0.0f, 0.0f));
-    model = glm::rotate(model, glm::radians(35.0f), vec3(0.0f, 1.0f, 0.0f));
-
-    setMatrices();
-    torus.render();
+    torus_m.render();
 }
 
 void PhongScene::setMatrices()
 {
-    mat4 mv = view * model;
+    view_m = orbitCamera_m.getViewMatrix();
+    mat4 mv = view_m * model_m;
     prog.setUniform("ModelViewMatrix", mv);
     prog.setUniform("NormalMatrix",
         glm::mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
-    prog.setUniform("MVP", projection * mv);
+    prog.setUniform("MVP", projection_m * mv);
 }
 
 void PhongScene::resize(int w, int h)
@@ -63,7 +73,7 @@ void PhongScene::resize(int w, int h)
     glViewport(0, 0, w, h);
     width_m = w;
     height_m = h;
-    projection = glm::perspective(glm::radians(70.0f), (float)w / h, 0.3f, 100.0f);
+    projection_m = glm::perspective(glm::radians(70.0f), (float)w / h, 0.3f, 100.0f);
 }
 
 void PhongScene::compileAndLinkShader()
@@ -80,4 +90,28 @@ void PhongScene::compileAndLinkShader()
         cerr << e.what() << endl;
         exit(EXIT_FAILURE);
     }
+}
+
+void PhongScene::mouseMove(MouseEvent event)
+{
+    auto posX = event.getXPos();
+    auto posY = event.getYPos();
+
+    if (event.isLeftButton()) // rotate
+    {
+        yaw_m -= (posX - lastMousePosX_m) * MOUSE_SENSITIVITY;
+        pitch_m += (posY - lastMousePosY_m) * MOUSE_SENSITIVITY;
+        orbitCamera_m.roate(yaw_m, pitch_m);
+    }
+
+    if (event.isRightButton()) // zoom in/out
+    {
+        float dx = 0.01f * (posX - lastMousePosX_m);
+        float dy = 0.01f * (posY - lastMousePosY_m);
+        radius_m += dx - dy;
+        orbitCamera_m.setRadius(radius_m);
+    }
+
+    lastMousePosX_m = posX;
+    lastMousePosY_m = posY;
 }

@@ -42,8 +42,9 @@ SceneRunner::SceneRunner(const std::string& windowTitle, int width, int height, 
 	}
 	glfwMakeContextCurrent(window_m);
 
-	glfwSetCursorPosCallback(window_m, SceneRunner::onMouseDrag);
+	glfwSetCursorPosCallback(window_m, SceneRunner::onMouseMove);
 	glfwSetMouseButtonCallback(window_m, SceneRunner::onMouseClick);
+	glfwSetScrollCallback(window_m, SceneRunner::onMouseScroll);
 
 	// Get framebuffer size
 	glfwGetFramebufferSize(window_m, &fbw, &fbh);
@@ -138,24 +139,25 @@ void SceneRunner::mainLoop(GLFWwindow* window)
 	}
 }
 
-void SceneRunner::onMouseDrag(GLFWwindow* window, double posX, double posY)
+void SceneRunner::onMouseMove(GLFWwindow* window, double posX, double posY)
 {
 	if (SceneRunner::scene_m == nullptr)
 		return;
 
+	double x, y;
+	glfwGetCursorPos(window, &x, &y);
+
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == 1)
 	{
-		double x, y;
-		glfwGetCursorPos(window, &x, &y);
-		SceneRunner::scene_m->mouseDrag(MouseEvent(x, y, false, true));
+		SceneRunner::scene_m->mouseMove(MouseEvent(x, y, false, true));
 	}
 
 	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == 1)
 	{
-		double x, y;
-		glfwGetCursorPos(window, &x, &y);
-		SceneRunner::scene_m->mouseDrag(MouseEvent(x, y, true, false));
+		SceneRunner::scene_m->mouseMove(MouseEvent(x, y, true, false));
 	}
+
+	SceneRunner::scene_m->mouseMove(MouseEvent(x, y, false, false));
 }
 
 void SceneRunner::onMouseClick(GLFWwindow* window, int mouseButtn, int action, int mods)
@@ -176,4 +178,10 @@ void SceneRunner::onMouseClick(GLFWwindow* window, int mouseButtn, int action, i
 		SceneRunner::scene_m->mouseDown(MouseEvent(static_cast<float>(x), static_cast<float>(y), false, true));
 
 	}
+}
+
+void SceneRunner::onMouseScroll(GLFWwindow* window, double deltaX, double deltaY)
+{
+	// for most mouses, deltaY has the value
+	SceneRunner::scene_m->mouseScroll(deltaX, deltaY);
 }

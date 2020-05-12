@@ -9,7 +9,7 @@
 class Scene
 {
 protected:
-	glm::mat4 model, view, projection;
+	glm::mat4 model_m, view_m, projection_m;
 
 public:
 	int width_m;
@@ -46,7 +46,9 @@ public:
 
 	virtual void mouseDown(MouseEvent event) {};
 
-	virtual void mouseDrag(MouseEvent event) {};
+	virtual void mouseMove(MouseEvent event) {};
+
+	virtual void mouseScroll(double deltaX, double deltaY) {};
 
 	void animate(bool value) { animate_m = value; }
 	bool animating() { return animate_m; }
