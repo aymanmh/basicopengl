@@ -37,6 +37,8 @@ private:
 	static void printHelpInfo(const char* exeFile, std::map<std::string, std::string>& sceneData);
 
 	void mainLoop(GLFWwindow* window);
+	
+	void imGuiInit();
 
 	static void onMouseMove(GLFWwindow* window, double posX, double posY);
 
