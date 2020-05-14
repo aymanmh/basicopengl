@@ -40,6 +40,9 @@
     <Filter Include="Assets\Shaders">
       <UniqueIdentifier>{ed9a97d6-a8a1-42a3-b2a9-e592b4ae5f01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\3rdparty\imGUI">
+      <UniqueIdentifier>{75e01638-22d2-4f36-802d-e3aeafd2e1d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Scene.h">
@@ -81,6 +84,30 @@
     <ClInclude Include="Include\Camera.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\thirdparty\imgui\imconfig.h">
+      <Filter>Source Files\3rdparty\imGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\thirdparty\imgui\imgui.h">
+      <Filter>Source Files\3rdparty\imGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\thirdparty\imgui\imgui_impl_glfw.h">
+      <Filter>Source Files\3rdparty\imGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\thirdparty\imgui\imgui_impl_opengl3.h">
+      <Filter>Source Files\3rdparty\imGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\thirdparty\imgui\imgui_internal.h">
+      <Filter>Source Files\3rdparty\imGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\thirdparty\imgui\imstb_rectpack.h">
+      <Filter>Source Files\3rdparty\imGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\thirdparty\imgui\imstb_textedit.h">
+      <Filter>Source Files\3rdparty\imGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\thirdparty\imgui\imstb_truetype.h">
+      <Filter>Source Files\3rdparty\imGUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\main.cpp">
@@ -121,6 +148,24 @@
     </ClCompile>
     <ClCompile Include="Src\Camera.cpp">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\thirdparty\imgui\imgui.cpp">
+      <Filter>Source Files\3rdparty\imGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\thirdparty\imgui\imgui_demo.cpp">
+      <Filter>Source Files\3rdparty\imGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\thirdparty\imgui\imgui_draw.cpp">
+      <Filter>Source Files\3rdparty\imGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\thirdparty\imgui\imgui_impl_glfw.cpp">
+      <Filter>Source Files\3rdparty\imGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\thirdparty\imgui\imgui_impl_opengl3.cpp">
+      <Filter>Source Files\3rdparty\imGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\thirdparty\imgui\imgui_widgets.cpp">
+      <Filter>Source Files\3rdparty\imGUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -12,13 +12,15 @@
 #include <glm.hpp>
 #include <ext\matrix_transform.hpp>
 #include <ext\matrix_clip_space.hpp>
-
 #include "glutils.h"
+
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
 
 using std::string;
 using namespace std;
 using namespace glm;
-
 
 class MyPoint
 {
@@ -134,35 +136,44 @@ void SpriteScene::compileShaderProgram()
 }
 
 void SpriteScene::update(float t)
-{
-	return ;
-	if (t - lastTime > 5.0f)
-	{
-		switchImage = !switchImage;
-		lastTime = t;
-	}
-
-
+{	
 }
 
 void SpriteScene::render()
 {
-	drawScene();
-	return;
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	//drawScene();
+
+	// Start the Dear ImGui frame
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplGlfw_NewFrame();
+	ImGui::NewFrame();
+
+	// Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
+	//bool show_demo_window = true;
+	//ImGui::ShowDemoWindow(&show_demo_window);
+	drawIMGUI();
+
+
+
+	//return;
 
 	renderToTexture();
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	
 	//glViewport(0, 0, width_m, height_m);	
-	if(switchImage)
+	if(ShowFBO_m)
 		drawFBO();
 	else
 		drawScene();
+
+	ImGui::Render();
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 void SpriteScene::renderToTexture()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glViewport(0, 0, width_m, height_m);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, hdrFbo_m);
@@ -272,4 +283,11 @@ void SpriteScene::drawFBO()
 
 	glBindVertexArray(0);
 
+}
+
+void SpriteScene::drawIMGUI()
+{
+	ImGui::Begin("Demo window");
+	ImGui::Checkbox("Show FBO", &ShowFBO_m);
+	ImGui::End();
 }

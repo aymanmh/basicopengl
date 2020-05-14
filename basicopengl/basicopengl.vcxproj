@@ -11,6 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\thirdparty\imgui\imconfig.h" />
+    <ClInclude Include="..\thirdparty\imgui\imgui.h" />
+    <ClInclude Include="..\thirdparty\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="..\thirdparty\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="..\thirdparty\imgui\imgui_internal.h" />
+    <ClInclude Include="..\thirdparty\imgui\imstb_rectpack.h" />
+    <ClInclude Include="..\thirdparty\imgui\imstb_textedit.h" />
+    <ClInclude Include="..\thirdparty\imgui\imstb_truetype.h" />
     <ClInclude Include="Include\BasicScene.h" />
     <ClInclude Include="Include\Camera.h" />
     <ClInclude Include="Include\Drawable.h" />
@@ -27,6 +35,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\thirdparty\glad\src\glad.c" />
+    <ClCompile Include="..\thirdparty\imgui\imgui.cpp" />
+    <ClCompile Include="..\thirdparty\imgui\imgui_demo.cpp" />
+    <ClCompile Include="..\thirdparty\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\thirdparty\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="..\thirdparty\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="..\thirdparty\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Src\BasicScene.cpp" />
     <ClCompile Include="Src\Camera.cpp" />
     <ClCompile Include="Src\GLSLProgram.cpp" />
@@ -86,15 +100,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)thirdparty\glm;$(SolutionDir)thirdparty\stb;$(SolutionDir)thirdparty\glfw\include;$(SolutionDir)thirdparty\glad\include;$(ProjectDir)Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)thirdparty\glm;$(SolutionDir)thirdparty\stb;$(SolutionDir)thirdparty\glfw\include;$(SolutionDir)thirdparty\glad\include;$(ProjectDir)Include;$(SolutionDir)thirdparty\imGUI;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\thirdparty\glfw\lib;$(LibraryPath)</LibraryPath>
-    <SourcePath>$(SolutionDir)thirdparty\glad\src;$(SourcePath)</SourcePath>
+    <SourcePath>$(SolutionDir)thirdparty\glad\src;$(SolutionDir)thirdparty\imGUI;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)thirdparty\glm;$(SolutionDir)thirdparty\stb;$(SolutionDir)thirdparty\glfw\include;$(SolutionDir)thirdparty\glad\include;$(ProjectDir)Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)thirdparty\glm;$(SolutionDir)thirdparty\stb;$(SolutionDir)thirdparty\glfw\include;$(SolutionDir)thirdparty\glad\include;$(ProjectDir)Include;$(SolutionDir)thirdparty\imGUI;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\thirdparty\glfw\lib;$(LibraryPath)</LibraryPath>
-    <SourcePath>$(SolutionDir)thirdparty\glad\src;$(SourcePath)</SourcePath>
+    <SourcePath>$(SolutionDir)thirdparty\glad\src;$(SolutionDir)thirdparty\imGUI;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

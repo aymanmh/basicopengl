@@ -22,7 +22,7 @@ private:
     GLuint hdrFbo_m, blurFbo_m;
     std::unique_ptr<Quad> quad_m;
     GLuint renderTex_m;
-    bool switchImage = false;
+    bool ShowFBO_m = false;
     float lastTime = 0.0f;
     void compileShaderProgram();
     void setupFBO();
@@ -39,4 +39,5 @@ public:
     void renderToTexture();
     void drawScene();
     void drawFBO();
+    void drawIMGUI();
 };

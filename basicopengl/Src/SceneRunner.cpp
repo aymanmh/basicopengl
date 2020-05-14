@@ -1,6 +1,9 @@
 #pragma once
 #include "SceneRunner.h"
 #include <fstream>
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
 
 std::unique_ptr<Scene> SceneRunner::scene_m = nullptr;
 
@@ -54,6 +57,8 @@ SceneRunner::SceneRunner(const std::string& windowTitle, int width, int height, 
 
 	GLUtils::dumpGLInfo();
 
+	imGuiInit();
+
 	// Initialization
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
@@ -81,6 +86,10 @@ int SceneRunner::run()
 			GL_DEBUG_SEVERITY_NOTIFICATION, -1, "End debug");
 
 	glfwTerminate();
+
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplGlfw_Shutdown();
+	ImGui::DestroyContext();
 
 	return EXIT_SUCCESS;
 }
@@ -139,6 +148,22 @@ void SceneRunner::mainLoop(GLFWwindow* window)
 	}
 }
 
+void SceneRunner::imGuiInit()
+{
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+
+	// Setup Dear ImGui style
+	ImGui::StyleColorsDark();
+	//ImGui::StyleColorsClassic();
+
+	// Setup Platform/Renderer bindings
+	ImGui_ImplGlfw_InitForOpenGL(window_m, true);
+	ImGui_ImplOpenGL3_Init("#version 450");
+}
+
 void SceneRunner::onMouseMove(GLFWwindow* window, double posX, double posY)
 {
 	if (SceneRunner::scene_m == nullptr)
@@ -163,6 +188,11 @@ void SceneRunner::onMouseMove(GLFWwindow* window, double posX, double posY)
 void SceneRunner::onMouseClick(GLFWwindow* window, int mouseButtn, int action, int mods)
 {
 	if (SceneRunner::scene_m == nullptr)
+		return;
+
+	ImGuiIO& io = ImGui::GetIO();
+
+	if (io.WantCaptureMouse)
 		return;
 
 	if (mouseButtn == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
