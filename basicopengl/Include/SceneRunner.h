@@ -23,7 +23,7 @@ private:
 	bool debug_m;           // Set true to enable debug messages
 	bool fullScreen_m;
 	static std::unique_ptr<Scene> scene_m; // ugly but works
-
+	double fps_m;
 public:
 	SceneRunner(const std::string& windowTitle, int width = WIN_DEFAULT_WIDTH, int height = WIN_DEFAULT_HEIGHT, int samples = 0, bool fullScreen = false);
 
@@ -39,6 +39,8 @@ private:
 	void mainLoop(GLFWwindow* window);
 	
 	void imGuiInit();
+
+	double calculateFPS();
 
 	static void onMouseMove(GLFWwindow* window, double posX, double posY);
 

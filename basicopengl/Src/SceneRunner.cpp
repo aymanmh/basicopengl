@@ -136,7 +136,7 @@ void SceneRunner::mainLoop(GLFWwindow* window)
 
 	while (!glfwWindowShouldClose(window) && !glfwGetKey(window, GLFW_KEY_ESCAPE)) {
 		GLUtils::checkForOpenGLError(__FILE__, __LINE__);
-
+		SceneRunner::scene_m->setFPS(calculateFPS());
 		SceneRunner::scene_m->update(float(glfwGetTime()));
 		SceneRunner::scene_m->render();
 		glfwSwapBuffers(window);
@@ -162,6 +162,28 @@ void SceneRunner::imGuiInit()
 	// Setup Platform/Renderer bindings
 	ImGui_ImplGlfw_InitForOpenGL(window_m, true);
 	ImGui_ImplOpenGL3_Init("#version 450");
+}
+
+double SceneRunner::calculateFPS()
+{
+	static double prevSeconds = 0.0;
+	static double frameCount = 0.0;
+	double elapsedSeconds;
+	double currentSeconds = glfwGetTime();
+
+	elapsedSeconds = currentSeconds - prevSeconds;
+
+	if (elapsedSeconds > .025)
+	{
+		prevSeconds = currentSeconds;
+		fps_m = frameCount / elapsedSeconds;
+		// double perFrame = 1000.0 / fps_m;
+		frameCount = 0;
+	}
+
+	frameCount++;
+
+	return fps_m;
 }
 
 void SceneRunner::onMouseMove(GLFWwindow* window, double posX, double posY)

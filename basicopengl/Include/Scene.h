@@ -8,19 +8,20 @@
 
 class Scene
 {
-protected:
-	glm::mat4 model_m, view_m, projection_m;
-
 public:
-	int width_m;
-	int height_m;
 
 	Scene() : animate_m(true), width_m(800), height_m(600) { }
 	virtual ~Scene() {}
 
-	void setDimensions(int w, int h) {
+	void setDimensions(int w, int h) 
+	{
 		width_m = w;
 		height_m = h;
+	}
+
+	void setFPS(double fps)
+	{
+		fps_m = fps;
 	}
 
 	/**
@@ -54,5 +55,9 @@ public:
 	bool animating() { return animate_m; }
 
 protected:
+	glm::mat4 model_m, view_m, projection_m;
 	bool animate_m;
+	int width_m;
+	int height_m;
+	double fps_m;
 };
