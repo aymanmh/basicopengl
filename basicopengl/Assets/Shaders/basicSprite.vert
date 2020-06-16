@@ -2,12 +2,17 @@
 
 layout (location = 0) in vec3 pos;
 layout (location = 1) in vec3 in_color;
+layout (location = 2) in vec2 in_uv;
 
 uniform mat4 mvp;
+
+out vec2 TexCoords;
 
 out vec4 color;
 void main(void)
 {
+    TexCoords = in_uv;
+
     //gl_Position = vec4(pos.x +posOffset.x,pos.y+posOffset.y,pos.z,1.0);
     //gl_PointSize = 100.0;
     gl_Position = mvp * vec4(pos,1.0);	
