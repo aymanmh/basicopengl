@@ -16,17 +16,31 @@ private:
     GLuint vaoHandle_m;
     GLSLProgram program_m;
     GLSLProgram basicProgram_m;
+    GLSLProgram blurProgram_m;
     std::vector<MyPoint> myPoints_m;
     Texture2d flair_m;
     Texture2d space_m;
-    GLuint hdrFbo_m, blurFbo_m;
+    GLuint hdrFbo_m = 0;
+    GLuint blurFBO_m = 0;
     std::unique_ptr<Quad> quad_m;
-    GLuint renderTex_m;
-    bool ShowFBO_m = false;
+    GLuint hdrTexture_m, brightnessTexture_m, blurTexture1_m, blurTexture2_m;
+    bool ShowHDR_m = false;
+    bool ShowBrightness_m = false;
+    bool ShowBlur_m = false;
+    bool bloom_m = true;
     float lastTime = 0.0f;
+    float luminanceThresh_m = 0.1f;
+    float exposure_m = 1.0f;
+    float gamma_m = 2.2f;
     void compileShaderProgram();
     void setupFBO();
+    void hBlur();
+    void vBlur();
+
     GLuint spirtesVbo;
+    glm::mat4  mvp_m;
+
+
 public:
     SpriteScene();
 
@@ -36,8 +50,11 @@ public:
     void resize(int, int) override;
     void mouseDown(MouseEvent event) override;
 
+private:
     void renderToTexture();
-    void drawScene();
+    void drawScene(int pass);
     void drawFBO();
     void drawIMGUI();
+    float gaussian(float x, float sigma2);
+    void finalDraw();
 };

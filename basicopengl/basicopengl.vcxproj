@@ -19,6 +19,7 @@
     <ClInclude Include="..\thirdparty\imgui\imstb_rectpack.h" />
     <ClInclude Include="..\thirdparty\imgui\imstb_textedit.h" />
     <ClInclude Include="..\thirdparty\imgui\imstb_truetype.h" />
+    <ClInclude Include="Framebuffer.h" />
     <ClInclude Include="Include\BasicScene.h" />
     <ClInclude Include="Include\Camera.h" />
     <ClInclude Include="Include\Drawable.h" />
@@ -60,6 +61,7 @@
     <None Include="Assets\Shaders\basic.vert" />
     <None Include="Assets\Shaders\basicSprite.frag" />
     <None Include="Assets\Shaders\basicSprite.vert" />
+    <None Include="Assets\Shaders\blur.frag" />
     <None Include="Assets\Shaders\phong.frag" />
     <None Include="Assets\Shaders\phong.vert" />
     <None Include="Assets\Shaders\texture.frag" />

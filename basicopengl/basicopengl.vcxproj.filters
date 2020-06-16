@@ -108,6 +108,9 @@
     <ClInclude Include="..\thirdparty\imgui\imstb_truetype.h">
       <Filter>Source Files\3rdparty\imGUI</Filter>
     </ClInclude>
+    <ClInclude Include="Framebuffer.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\main.cpp">
@@ -192,6 +195,9 @@
       <Filter>Assets\Shaders</Filter>
     </None>
     <None Include="Assets\Shaders\texture.vert">
+      <Filter>Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\blur.frag">
       <Filter>Assets\Shaders</Filter>
     </None>
   </ItemGroup>
