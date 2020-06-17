@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\thirdparty\fastnoise\FastNoise.h" />
     <ClInclude Include="..\thirdparty\imgui\imconfig.h" />
     <ClInclude Include="..\thirdparty\imgui\imgui.h" />
     <ClInclude Include="..\thirdparty\imgui\imgui_impl_glfw.h" />
@@ -35,6 +36,7 @@
     <ClInclude Include="Include\TriangleMesh.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\thirdparty\fastnoise\FastNoise.cpp" />
     <ClCompile Include="..\thirdparty\glad\src\glad.c" />
     <ClCompile Include="..\thirdparty\imgui\imgui.cpp" />
     <ClCompile Include="..\thirdparty\imgui\imgui_demo.cpp" />
@@ -102,15 +104,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)thirdparty\glm;$(SolutionDir)thirdparty\stb;$(SolutionDir)thirdparty\glfw\include;$(SolutionDir)thirdparty\glad\include;$(ProjectDir)Include;$(SolutionDir)thirdparty\imGUI;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)thirdparty\glm;$(SolutionDir)thirdparty\stb;$(SolutionDir)thirdparty\glfw\include;$(SolutionDir)thirdparty\glad\include;$(ProjectDir)Include;$(SolutionDir)thirdparty\imGUI;$(SolutionDir)thirdparty\fastnoise;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\thirdparty\glfw\lib;$(LibraryPath)</LibraryPath>
-    <SourcePath>$(SolutionDir)thirdparty\glad\src;$(SolutionDir)thirdparty\imGUI;$(SourcePath)</SourcePath>
+    <SourcePath>$(SolutionDir)thirdparty\glad\src;$(SolutionDir)thirdparty\imGUI;$(SolutionDir)thirdparty\fastnoise;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)thirdparty\glm;$(SolutionDir)thirdparty\stb;$(SolutionDir)thirdparty\glfw\include;$(SolutionDir)thirdparty\glad\include;$(ProjectDir)Include;$(SolutionDir)thirdparty\imGUI;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)thirdparty\glm;$(SolutionDir)thirdparty\stb;$(SolutionDir)thirdparty\glfw\include;$(SolutionDir)thirdparty\glad\include;$(ProjectDir)Include;$(SolutionDir)thirdparty\imGUI;$(SolutionDir)thirdparty\fastnoise;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\thirdparty\glfw\lib;$(LibraryPath)</LibraryPath>
-    <SourcePath>$(SolutionDir)thirdparty\glad\src;$(SolutionDir)thirdparty\imGUI;$(SourcePath)</SourcePath>
+    <SourcePath>$(SolutionDir)thirdparty\glad\src;$(SolutionDir)thirdparty\imGUI;$(SolutionDir)thirdparty\fastnoise;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
