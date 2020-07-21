@@ -2,6 +2,7 @@
 #include "SceneRunner.h"
 #include "BasicScene.h"
 #include "SpriteScene.h"
+#include "GlowScene.h"
 #include "PhongScene.h"
 
 int main()
@@ -11,7 +12,8 @@ int main()
 	std::unique_ptr<Scene> scene;
 
 	//scene = std::unique_ptr<Scene>(new BasicScene());
-	scene = std::unique_ptr<Scene>(new SpriteScene());
+	//scene = std::unique_ptr<Scene>(new SpriteScene());
+	scene = std::unique_ptr<Scene>(new GlowScene());
 	//scene = std::unique_ptr<Scene>(new PhongScene());
 	
 	myRunner.setScene(std::move(scene));

@@ -114,6 +114,9 @@
     <ClInclude Include="..\thirdparty\fastnoise\FastNoise.h">
       <Filter>Source Files\3rdparty</Filter>
     </ClInclude>
+    <ClInclude Include="Include\GlowScene.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\main.cpp">
@@ -176,6 +179,9 @@
     <ClCompile Include="..\thirdparty\fastnoise\FastNoise.cpp">
       <Filter>Source Files\3rdparty</Filter>
     </ClCompile>
+    <ClCompile Include="Src\GlowScene.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
@@ -204,6 +210,12 @@
       <Filter>Assets\Shaders</Filter>
     </None>
     <None Include="Assets\Shaders\blur.frag">
+      <Filter>Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\GlowSprite.frag">
+      <Filter>Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\GlowSprite.vert">
       <Filter>Assets\Shaders</Filter>
     </None>
   </ItemGroup>

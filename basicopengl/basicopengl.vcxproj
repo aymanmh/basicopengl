@@ -24,6 +24,7 @@
     <ClInclude Include="Include\BasicScene.h" />
     <ClInclude Include="Include\Camera.h" />
     <ClInclude Include="Include\Drawable.h" />
+    <ClInclude Include="Include\GlowScene.h" />
     <ClInclude Include="Include\GLSLProgram.h" />
     <ClInclude Include="Include\glutils.h" />
     <ClInclude Include="Include\MouseEvent.h" />
@@ -46,6 +47,7 @@
     <ClCompile Include="..\thirdparty\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Src\BasicScene.cpp" />
     <ClCompile Include="Src\Camera.cpp" />
+    <ClCompile Include="Src\GlowScene.cpp" />
     <ClCompile Include="Src\GLSLProgram.cpp" />
     <ClCompile Include="Src\glutils.cpp" />
     <ClCompile Include="Src\main.cpp" />
@@ -64,6 +66,8 @@
     <None Include="Assets\Shaders\basicSprite.frag" />
     <None Include="Assets\Shaders\basicSprite.vert" />
     <None Include="Assets\Shaders\blur.frag" />
+    <None Include="Assets\Shaders\GlowSprite.frag" />
+    <None Include="Assets\Shaders\GlowSprite.vert" />
     <None Include="Assets\Shaders\phong.frag" />
     <None Include="Assets\Shaders\phong.vert" />
     <None Include="Assets\Shaders\texture.frag" />
