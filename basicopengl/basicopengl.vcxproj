@@ -23,11 +23,13 @@
     <ClInclude Include="Framebuffer.h" />
     <ClInclude Include="Include\BasicScene.h" />
     <ClInclude Include="Include\Camera.h" />
+    <ClInclude Include="Include\CloudScene.h" />
     <ClInclude Include="Include\Drawable.h" />
     <ClInclude Include="Include\GlowScene.h" />
     <ClInclude Include="Include\GLSLProgram.h" />
     <ClInclude Include="Include\glutils.h" />
     <ClInclude Include="Include\MouseEvent.h" />
+    <ClInclude Include="Include\NoiseTexture.h" />
     <ClInclude Include="Include\PhongScene.h" />
     <ClInclude Include="Include\Scene.h" />
     <ClInclude Include="Include\SceneRunner.h" />
@@ -47,11 +49,13 @@
     <ClCompile Include="..\thirdparty\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Src\BasicScene.cpp" />
     <ClCompile Include="Src\Camera.cpp" />
+    <ClCompile Include="Src\CloudScene.cpp" />
     <ClCompile Include="Src\GlowScene.cpp" />
     <ClCompile Include="Src\GLSLProgram.cpp" />
     <ClCompile Include="Src\glutils.cpp" />
     <ClCompile Include="Src\main.cpp" />
     <ClCompile Include="Src\MouseEvent.cpp" />
+    <ClCompile Include="Src\NoiseTexture.cpp" />
     <ClCompile Include="Src\PhongScene.cpp" />
     <ClCompile Include="Src\SceneRunner.cpp" />
     <ClCompile Include="Src\SpriteScene.cpp" />
@@ -66,6 +70,8 @@
     <None Include="Assets\Shaders\basicSprite.frag" />
     <None Include="Assets\Shaders\basicSprite.vert" />
     <None Include="Assets\Shaders\blur.frag" />
+    <None Include="Assets\Shaders\cloud.frag" />
+    <None Include="Assets\Shaders\cloud.vert" />
     <None Include="Assets\Shaders\GlowSprite.frag" />
     <None Include="Assets\Shaders\GlowSprite.vert" />
     <None Include="Assets\Shaders\phong.frag" />
