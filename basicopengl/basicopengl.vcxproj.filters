@@ -43,6 +43,15 @@
     <Filter Include="Source Files\3rdparty\imGUI">
       <UniqueIdentifier>{75e01638-22d2-4f36-802d-e3aeafd2e1d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Scenes\Noise">
+      <UniqueIdentifier>{85aca56d-c14d-4500-98d3-c764d3e5e399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes\Noise">
+      <UniqueIdentifier>{ae353752-4c48-41cb-8407-38e6e89ebb1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Shaders\Noise">
+      <UniqueIdentifier>{7d27063b-4200-4ce5-90d3-619684d9453f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Scene.h">
@@ -117,6 +126,12 @@
     <ClInclude Include="Include\GlowScene.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Include\NoiseTexture.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CloudScene.h">
+      <Filter>Header Files\Scenes\Noise</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\main.cpp">
@@ -182,6 +197,12 @@
     <ClCompile Include="Src\GlowScene.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Src\NoiseTexture.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\CloudScene.cpp">
+      <Filter>Source Files\Scenes\Noise</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
@@ -217,6 +238,12 @@
     </None>
     <None Include="Assets\Shaders\GlowSprite.vert">
       <Filter>Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\cloud.frag">
+      <Filter>Assets\Shaders\Noise</Filter>
+    </None>
+    <None Include="Assets\Shaders\cloud.vert">
+      <Filter>Assets\Shaders\Noise</Filter>
     </None>
   </ItemGroup>
 </Project>
